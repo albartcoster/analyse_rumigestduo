@@ -14,4 +14,4 @@ WORKDIR /app
 EXPOSE 3838
 
 # Run the R Shiny app
-CMD ["R", "-e", "shiny::runApp('./app.R', host='0.0.0.0', port=3838)"]
+CMD ["R", "-e", "shiny::runApp('./app.R', host='0.0.0.0', port=8080)"]
