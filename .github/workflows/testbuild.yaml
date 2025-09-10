@@ -57,5 +57,4 @@ jobs:
           sed -i 's/__REPO__/${{ env.REPO }}/g' /etc/nginx/sites-enabled/locations/${{ env.REPO }}
           sed -i 's/__PORT__/${{ env.PORT }}/g' /etc/nginx/sites-enabled/locations/${{ env.REPO }}
           nginx -s reload          
-          docker run --rm --name ${{ env.REPO }} -p ${{ env.PORT }}:8080 ghcr.io/costeranalytics/${{ env.REPO }}:latest
-
+          docker run --rm --name ${{ env.REPO }} --env PG_USER --env PG_HOST --env PG_PWD --env PG_DB -p ${{ env.PORT }}:8080 ghcr.io/costeranalytics/${{ env.REPO }}:latest
