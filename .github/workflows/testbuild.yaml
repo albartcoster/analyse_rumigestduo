@@ -1,5 +1,5 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-name: Deploy container app with verbose for test / debug (docker not detached)
+name: Debug deploy
 
 on:
   workflow_dispatch:
