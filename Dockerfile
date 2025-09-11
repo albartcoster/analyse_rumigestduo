@@ -2,11 +2,11 @@
 FROM rocker/r-ver:4.2.0
 
 # Install R dependencies
-RUN R -e "install.packages(c('dplyr', 'tidyr','echarts4r','lubridate','bslib'))"
+RUN R -e "install.packages(c('dplyr', 'tidyr','echarts4r','lubridate','bslib','tools','readxl'))"
 
 # Copy the Shiny app code
 COPY app.R /app/
-COPY data.Rda /app
+# COPY data.Rda /app
 
 WORKDIR /app
 
