@@ -46,13 +46,14 @@ ui = fluidPage(
       )
     ),
     mainPanel(
-      fluidRow(column(6,echarts4rOutput("plotdil",height = "500px")),
-               column(6,echarts4rOutput("plotdatum",height = "500px"))),
+      ##fluidRow(column(6,echarts4rOutput("plotdil",height = "500px")),
+      ##         column(6,echarts4rOutput("plotdatum",height = "500px"))),
       fluidRow(echarts4rOutput("groteplot",height = "700px"))
     )))
 
   
 server = function(input, output,session) {
+  options(shiny.maxRequestSize=30*1024^2)
     cns <- c("id",
            "datum",
            "lactatie",
@@ -77,8 +78,9 @@ server = function(input, output,session) {
   
     data <- reactive({
       req(input$upload)
-      d <- read_xlsx(path = input$upload$name) |> rename_with(tolower)
-      print(nrow(d))
+      d <- read_xlsx(path = input$upload$name) |> 
+        rename_with(tolower) |> 
+        filter(productie>0,dim>0)
       d
     })
     
@@ -103,9 +105,9 @@ server = function(input, output,session) {
                         selected = 'productie',
                         choices = vns())
       updateDateInput(session,'dateg',
-                      value = max(data()$datum),
-                       min = min(data()$datum),
-                       max = max(data()$datum))
+                      value = max(data()$datum,na.rm = T),
+                       min = min(data()$datum,na.rm = T),
+                       max = max(data()$datum,na.rm = T))
       })
     
 
