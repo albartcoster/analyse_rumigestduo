@@ -26,7 +26,7 @@ ui = fluidPage(
       ),
       sliderInput(
         'dil',"Laktatiedagen:",
-        min = 1,max = max(data()$dim,na.rm = T),
+        min = 1,max = 500,
         step = 1,
         value = c(1,365)
       ),
@@ -129,7 +129,7 @@ server = function(input, output,session) {
       dt() |> 
         filter(name == "productie") |> 
         group_by(datum) |> 
-        summarise(dim = mean(dim,na.rm = T)) |> 
+        summarise(dim = mean(dim,na.rm = T),.groups = "drop") |> 
         e_charts(datum) |> 
         e_line(dim,symbol="none")
     })
@@ -154,7 +154,7 @@ server = function(input, output,session) {
       dt() |> 
         filter(name%in%input$trait) |> 
         group_by(name,datum) |> 
-        summarise(value = mean(value,na.rm = T)) |> 
+        summarise(value = mean(value,na.rm = T),.groups = 'drop') |> 
         e_charts(datum) |> 
         e_line(value,symbol="none") |> 
         e_tooltip(trigger = "axis") |> # tooltip
