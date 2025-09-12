@@ -46,8 +46,8 @@ ui = fluidPage(
       )
     ),
     mainPanel(
-      ##fluidRow(column(6,echarts4rOutput("plotdil",height = "500px")),
-      ##         column(6,echarts4rOutput("plotdatum",height = "500px"))),
+      fluidRow(column(6,echarts4rOutput("plotdil",height = "500px")),
+               column(6,echarts4rOutput("plotdatum",height = "500px"))),
       fluidRow(echarts4rOutput("groteplot",height = "700px"))
     )))
 
@@ -78,7 +78,7 @@ server = function(input, output,session) {
   
     data <- reactive({
       req(input$upload)
-      d <- read_xlsx(path = input$upload$name) |> 
+      d <- read_xlsx(path = input$upload$datapath) |> 
         rename_with(tolower) |> 
         filter(productie>0,dim>0)
       d
@@ -154,7 +154,7 @@ server = function(input, output,session) {
       dt() |> 
         filter(name%in%input$trait) |> 
         group_by(name,datum) |> 
-        summarise(value = mean(value,na.rm = T),.groups = 'drop') |> 
+        summarise(value = mean(value,na.rm = T)) |> 
         e_charts(datum) |> 
         e_line(value,symbol="none") |> 
         e_tooltip(trigger = "axis") |> # tooltip
