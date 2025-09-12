@@ -8,38 +8,38 @@ library(tools)
 library(readxl)
 
 ui = fluidPage(
-    titlePanel("Analyse van Lelyrobotdata"),
+    titlePanel("Analysis from productiondata"),
     ## Sidebar
 
     fileInput("upload", 
-              "Upload het xlsx bestand",
+              "Upload the xlsx file ",
               accept = ".xlsx"),
-    actionButton("show", "Uitleg"),
+    actionButton("show", "explaination"),
     
     sidebarLayout(
       sidebarPanel(
       sliderInput(
-        'lactations',"Laktaties:",
+        'lactations',"Laktations:",
         min = 1,max = 10,##na.rm = T),
         step = 1,
         value = c(1,3)
       ),
       sliderInput(
-        'dil',"Laktatiedagen:",
+        'dil',"Days in milk:",
         min = 1,max = 500,
         step = 1,
         value = c(1,365)
       ),
       selectInput(
         inputId = 'trait', 
-        label = "Kenmerk", 
+        label = "Trait", 
         choices = "productie",
         selected = 'productie',
         selectize = T,
         multiple = T
       ),
       dateInput("dateg",
-                "Datum grafiek",
+                "Date from the scatterplot",
                 value = Sys.Date(),
                 min = floor_date(Sys.Date(), unit = "month"),
                 max = Sys.Date()
@@ -63,13 +63,13 @@ server = function(input, output,session) {
       type_txt <- ifelse(input$type == "default", "notification", input$type)
       showNotification(
         "Invoer:
-        id = identificatie dier,
-        datum = datum (zorg dat het goed in excel staat gespecificeerd),\n
-        lactatie = lactatienummer,\n
-        dim = lactatiedagen,\n
-        productie = productie,\n
-        de andere kolommen worden als afhankelijke variabelen ingelezen,\n
-        hoofdletter of niet maakt niet uit\n",
+        id = animal,
+        datum = date of the record,\n
+        lactatie = lactationnumber,\n
+        dim = days in milk,\n
+        productie = production,\n
+        the other columns are considered as other production variables,\n
+        case of the columnnames does not matter\n",
         duration = NULL,
         id = "message"
       )
@@ -144,9 +144,9 @@ server = function(input, output,session) {
         e_tooltip(
           formatter = htmlwidgets::JS("
             function(params){
-              return('<strong> Koe' + params.name +
-                  '</strong><br />dil: ' + params.value[0] +
-                  '<br />waarde: ' + params.value[1])
+              return('<strong> Cow' + params.name +
+                  '</strong><br />dim: ' + params.value[0] +
+                  '<br />value: ' + params.value[1])
                   }
             ")) 
     })
