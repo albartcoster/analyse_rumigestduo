@@ -53,7 +53,7 @@ ui = fluidPage(
 
   
 server = function(input, output,session) {
-  options(shiny.maxRequestSize=200*1024^2)
+  options(shiny.maxRequestSize=300*1024^2)
     cns <- c("id",
            "datum",
            "lactatie",
