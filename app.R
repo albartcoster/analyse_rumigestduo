@@ -14,7 +14,7 @@ ui = fluidPage(
     fileInput("upload", 
               "Upload the xlsx file ",
               accept = ".xlsx"),
-    actionButton("show", "explaination"),
+    actionButton("show", "Explaination"),
     
     sidebarLayout(
       sidebarPanel(
