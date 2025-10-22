@@ -1,13 +1,38 @@
-library(shiny)
-library(dplyr)
-library(tidyr)
-library(echarts4r)
-library(lubridate)
-library(bslib)
-library(tools)
-library(readxl)
+packages <- c("shiny",
+              "dplyr",
+              "tidyr",
+              "echarts4r",
+              "lubridate",
+              "bslib",
+              "tools",
+              "readxl")
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE))
+  install.packages(packages[!installed_packages])
+invisible(lapply(packages, library, character.only = TRUE))
 
 ui = fluidPage(
+  tags$head(
+    HTML(
+      "
+     <script>
+     var socket_timeout_interval
+     var n = 0
+     $(document).on('shiny:connected', function(event) {
+     socket_timeout_interval = setInterval(function(){
+     Shiny.onInputChange('count', n++)
+     }, 15000)
+     });
+     $(document).on('shiny:disconnected', function(event) {
+     clearInterval(socket_timeout_interval)
+     });
+     </script>
+     "
+    )
+  ),
+  textOutput("keepAlive"),
+  
+  
     titlePanel("Analysis from productiondata"),
     ## Sidebar
 
@@ -160,6 +185,10 @@ server = function(input, output,session) {
         e_tooltip(trigger = "axis") |> # tooltip
         e_connect_group("grp") |> 
         e_datazoom(x_index = 0, type = "slider") 
+    })
+    output$keepAlive <- renderText({
+      req(input$count)
+      paste("keep alive ", input$count)
     })
   }
     
