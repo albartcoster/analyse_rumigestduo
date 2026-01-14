@@ -190,6 +190,7 @@ server = function(input, output,session) {
     req(input$count)
     paste("keep alive ", input$count)
   })
+  
 }
 
 
