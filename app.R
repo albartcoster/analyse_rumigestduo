@@ -68,6 +68,13 @@ ui = fluidPage(
                 value = Sys.Date(),
                 min = floor_date(Sys.Date(), unit = "month"),
                 max = Sys.Date()
+      ),
+      dateRangeInput('cdates',
+                     "Range of calving dates",
+                     start = "2000-01-01",
+                     end = Sys.Date(),
+                     min = "1900-01-01",
+                     max = Sys.Date()
       )
     ),
     mainPanel(
@@ -83,6 +90,7 @@ server = function(input, output,session) {
            "datum",
            "lactatie",
            "dim",
+           "calf_date",
            "productie")
   observe({
     type_txt <- ifelse(input$type == "default", "notification", input$type)
@@ -105,7 +113,8 @@ server = function(input, output,session) {
     req(input$upload)
     d <- read_xlsx(path = input$upload$datapath) |> 
       rename_with(tolower) |> 
-      filter(productie>0,dim>0)
+      filter(productie>0,dim>0) |> 
+      mutate(calf_date = datum - days(dim))
     d
   })
   
@@ -133,6 +142,11 @@ server = function(input, output,session) {
                     value = max(data()$datum,na.rm = T),
                     min = min(data()$datum,na.rm = T),
                     max = max(data()$datum,na.rm = T))
+    updateDateRangeInput(session,'cdates',
+                   start = min(data()$calf_date,na.rm = T),
+                   end = max(data()$calf_date,na.rm = T)
+    )
+                   
   })
   
   
@@ -144,7 +158,9 @@ server = function(input, output,session) {
                lactatie>=input$lactations[1]&
                lactatie<=input$lactations[2]&
                input$dil[1]<=dim&
-               dim<input$dil[2]
+               dim<input$dil[2]&
+               calf_date>=input$cdates[1]&
+               calf_date<=input$cdates[2]
       ) |>
       ungroup()|>
       pivot_longer(cols = vns(),names_repair = 'minimal')|> 
