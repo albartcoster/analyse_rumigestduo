@@ -2,16 +2,21 @@
 FROM rocker/r-ver:4.2.0
 
 # Install R dependencies
-RUN R -e "install.packages(c('dplyr', 'tidyr','echarts4r','lubridate','bslib','tools','readxl'))"
+RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
 
 # Copy the Shiny app code
-COPY app.R /app/
-# COPY data.Rda /app
-
 WORKDIR /app
+COPY renv.lock renv.lock
+RUN R -e "renv::restore()"
+COPY app.R app.R
+COPY data/data.Rdata data/data.Rdata
 
 # Expose the application port
-EXPOSE 3838
+EXPOSE 8080
 
 # Run the R Shiny app
 CMD ["R", "-e", "shiny::runApp('./app.R', host='0.0.0.0', port=8080)"]
+
+## voer uit lokaal:
+## docker build -t rumigestapp .
+## docker run -p 8080:8080 rumigestapp
