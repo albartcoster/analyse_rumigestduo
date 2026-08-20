@@ -1,6 +1,6 @@
+.xlsx
+.env
 .Rproj.user
-*.Rhistory
+.Rhistory
 .RData
 .Ruserdata
-.xlsx
-*.env*

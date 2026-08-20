@@ -4,213 +4,292 @@ packages <- c("shiny",
               "echarts4r",
               "lubridate",
               "bslib",
-              "tools",
-              "readxl")
-installed_packages <- packages %in% rownames(installed.packages())
-if (any(installed_packages == FALSE))
-  install.packages(packages[!installed_packages])
+              "ggplot2",
+              "ggiraph",
+              "bslib",
+              "thematic",
+              "tools")
 invisible(lapply(packages, library, character.only = TRUE))
 
-ui = fluidPage(
-  tags$head(
-    HTML(
-      "
-     <script>
-     var socket_timeout_interval
-     var n = 0
-     $(document).on('shiny:connected', function(event) {
-     socket_timeout_interval = setInterval(function(){
-     Shiny.onInputChange('count', n++)
-     }, 15)
-     });
-     $(document).on('shiny:disconnected', function(event) {
-     clearInterval(socket_timeout_interval)
-     });
-     </script>
-     "
-    )
-  ),
-  textOutput("keepAlive"),
-  
-  
-  titlePanel("Analysis from productiondata"),
-  ## Sidebar
-  
-  fileInput("upload", 
-            "Upload the xlsx file ",
-            accept = ".xlsx"),
-  actionButton("show", "Explaination"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput(
-        'lactations',"Laktations:",
-        min = 1,max = 10,##na.rm = T),
-        step = 1,
-        value = c(1,3)
-      ),
-      sliderInput(
-        'dil',"Days in milk:",
-        min = 1,max = 500,
-        step = 1,
-        value = c(1,365)
-      ),
-      selectInput(
-        inputId = 'trait', 
-        label = "Trait", 
-        choices = "productie",
-        selected = 'productie',
-        selectize = T,
-        multiple = T
-      ),
-      dateInput("dateg",
-                "Date from the scatterplot",
-                value = Sys.Date(),
-                min = floor_date(Sys.Date(), unit = "month"),
-                max = Sys.Date()
-      ),
-      dateRangeInput('cdates',
-                     "Range of calving dates",
-                     start = "2000-01-01",
-                     end = Sys.Date(),
-                     min = "1900-01-01",
-                     max = Sys.Date()
-      )
+load("data/data.Rdata")
+##ddff <- dff %>% pivot_longer(cols = !c(datum,farm,week))
+
+options(shiny.host = "0.0.0.0")
+options(shiny.port = 8080)
+
+# R code
+# Load necessary libraries
+library(shiny)
+library(bslib)
+
+thematic_shiny()
+
+# UI with bslib theme, pageNavbar, and bookmarking support
+ui <- function(request){
+  page_sidebar(
+  title = "App analyse data Proef Rumigest DUO",
+  theme = bs_theme(version = 5, bootswatch = "minty"), # Use bslib theme
+  sidebar = sidebar(
+    selectInput(
+      inputId = 'farm',
+      label = "Bedrijf",
+      choices = unique(dff$farm),
+      selected = unique(dff$farm),
+      selectize = T,
+      multiple = T
     ),
-    mainPanel(
-      fluidRow(column(6,echarts4rOutput("plotdil",height = "500px")),
-               column(6,echarts4rOutput("plotdatum",height = "500px"))),
-      fluidRow(echarts4rOutput("groteplot",height = "700px"))
-    )))
+    ##renvbookmarkButton() # Adds the bookmark button
+  ),
+  navset_card_underline(
+    id = "hoofd_tabs", # ID is verplicht zodat bookmarking het actieve tabblad onthoudt
+    title = "Resultaten",
+    full_screen = TRUE, # Maakt de gehele kaart (inclusief panelen) maximaliseerbaar
+    
+    # Panel 1: Tankdata
+    nav_panel(
+      id = "tankanalyse",
+      title = "Tankanalyse",
+      icon = icon("chart-line"),
+      layout_sidebar(
+        fillable = TRUE,
+        sidebar = sidebar(
+          title = "Opties",
+          position = "right",
+          selectInput(
+            inputId = 'vartanks',
+            label = "Parameter",
+            choices = unique(dff$name),
+            selected = unique(dff$name[1]),
+            selectize = T,
+            multiple = T
+          ),
+        ),
+        
+      girafeOutput(outputId = "groteplot")
+    )),
+    
+    # Panel 2: Voerefficiëntie
+    nav_panel(
+      id = 'voereff',
+      title = "Data voeropname",
+      icon = icon("chart-line"),
+      layout_sidebar(
+        fillable = TRUE,
+        sidebar = sidebar(
+          title = "Opties",
+          position = "right",
+          selectInput(
+            inputId = 'varfes',
+            label = "Parameter",
+            choices = unique(tabfe$name),
+            selected = unique(tabfe$name[1]),
+            selectize = T,
+            multiple = T
+          ),
+          dateRangeInput(inputId = 'fedates',
+                         "Begin en einddatum",
+                         start = min(tabfe$date),
+                         end = max(tabfe$date),
+                         min = min(tabfe$date),
+                         max = max(tabfe$date)
+          )
+        ),
+        girafeOutput(outputId = "feplot")
+      )),
+    
+    # Panel 3: Dagproducties
+    nav_panel(
+      id = 'productie',
+      title = "Dagproductiedata",
+      icon = icon("chart-line"),
+      layout_sidebar(
+        fillable = TRUE,
+        sidebar = sidebar(
+          title = "Opties",
+          position = "right",
+          selectInput(
+            inputId = 'varpres',
+            label = "Parameter",
+            choices = unique(prdata$name),
+            selected = unique(prdata$name[1]),
+            selectize = T,
+            multiple = T
+          ),
+          dateRangeInput(inputId = 'prdates',
+                         "Begin en einddatum",
+                         start = min(prdata$date_time),
+                         end = max(prdata$date_time),
+                         min = min(prdata$date_time),
+                         max = max(prdata$date_time)
+          ),
+          sliderInput(
+            'lactations',"Laktaties:",
+            min = 1,max = max(prdata$lactation),
+            step = 1,
+            value = c(3,8)
+          ),
+          sliderInput(
+            'dil',"laktatiedagen:",
+            min = 1,max = 500,
+            step = 1,
+            value = c(1,365)
+          )
+        ),
+        girafeOutput(outputId = "prplot")
+      )),
+    )
+  )}
+
+  
+
 
 
 server = function(input, output,session) {
-  options(shiny.maxRequestSize=300*1024^2)
-  cns <- c("id",
-           "datum",
-           "lactatie",
-           "dim",
-           "calf_date",
-           "productie")
-  observe({
-    type_txt <- ifelse(input$type == "default", "notification", input$type)
-    showNotification(
-      "Invoer:
-        id = animal,
-        datum = date of the record,\n
-        lactatie = lactationnumber,\n
-        dim = days in milk,\n
-        productie = production,\n
-        the other columns are considered as other production variables,\n
-        case of the columnnames does not matter\n",
-      duration = NULL,
-      id = "message"
-    )
-  }) |>
-    bindEvent(input$show)
-  
-  data <- reactive({
-    req(input$upload)
-    d <- read_xlsx(path = input$upload$datapath) |> 
-      rename_with(tolower) |> 
-      filter(productie>0,dim>0) |> 
-      mutate(calf_date = datum - days(dim))
-    d
-  })
-  
-  vns <- reactive({
-    vns <- colnames(data())
-    vns <- c('productie',vns[!vns%in%cns])
-  })
-  
-  observe({
-    updateSliderInput(session,"dil",
-                      min = 1,
-                      max = max(data()$dim,na.rm = T),
-                      value = c(10,100)
-    )
-    updateSliderInput(session, 'lactations',
-                      min = 1,
-                      max = max(data()$lactatie,na.rm = T),
-                      value = c(1,3)
-                      
-    )
-    updateSelectInput(session, "trait",
-                      selected = 'productie',
-                      choices = vns())
-    updateDateInput(session,'dateg',
-                    value = max(data()$datum,na.rm = T),
-                    min = min(data()$datum,na.rm = T),
-                    max = max(data()$datum,na.rm = T))
-    updateDateRangeInput(session,'cdates',
-                   start = min(data()$calf_date,na.rm = T),
-                   end = max(data()$calf_date,na.rm = T)
-    )
-                   
-  })
-  
-  
   dt <- reactive({
-    data() |> 
-      filter(productie>0&
-               dim>0&
-               lactatie>0&
-               lactatie>=input$lactations[1]&
-               lactatie<=input$lactations[2]&
-               input$dil[1]<=dim&
-               dim<input$dil[2]&
-               calf_date>=input$cdates[1]&
-               calf_date<=input$cdates[2]
-      ) |>
-      ungroup()|>
-      pivot_longer(cols = vns(),names_repair = 'minimal')|> 
-      filter(!is.na(value))
-  })
-  output$plotdil = renderEcharts4r({
-    dt() |> 
-      filter(name == "productie") |> 
-      group_by(datum) |> 
-      summarise(dim = mean(dim,na.rm = T),.groups = "drop") |> 
-      e_charts(datum) |> 
-      e_line(dim,symbol="none")
-  })
-  output$plotdatum = renderEcharts4r({
-    dt() |>
-      filter(name%in%input$trait[1]&
-               datum==input$dateg) |>
-      ungroup() |>
-      ##group_by(datetime) |> 
-      e_chart(dim) |>
-      e_scatter(value,symbol_size = 5,bind = id) |>
-      e_tooltip(
-        formatter = htmlwidgets::JS("
-            function(params){
-              return('<strong> Cow' + params.name +
-                  '</strong><br />dim: ' + params.value[0] +
-                  '<br />value: ' + params.value[1])
-                  }
-            ")) 
-  })
-  output$groteplot <- renderEcharts4r({
-    dt() |> 
-      filter(name%in%input$trait) |> 
-      group_by(name,datum) |> 
-      summarise(value = mean(value,na.rm = T)) |> 
-      e_charts(datum) |> 
-      e_line(value,symbol="none") |> 
-      e_tooltip(trigger = "axis") |> # tooltip
-      e_connect_group("grp") |> 
-      e_datazoom(x_index = 0, type = "slider") 
-  })
-  output$keepAlive <- renderText({
-    req(input$count)
-    paste("keep alive ", input$count)
+    dff |> 
+      filter(value>0,
+             !is.na(value),
+             farm%in%input$farm,
+            name%in%input$vartanks)
+    })
+  
+  dfe <- reactive({
+    tabfe |> 
+      filter(value>0,
+             !is.na(value),
+             user%in%input$farm,
+             name%in%input$varfes,
+             between(date,input$fedates[1],input$fedates[2]))
   })
   
+  dpr <- reactive({
+    prdata |> 
+      mutate(week = floor_date(date_time,unit="week")) |> 
+      filter(value>0,
+            !is.na(value),
+            farm%in%input$farm,
+            name%in%input$varpres,
+            between(date_time,input$prdates[1],input$prdates[2]),
+            between(lactation,input$lactations[1],input$lactations[2]),
+            between(dim,input$dil[1],input$dil[2])) |>
+      group_by(farm,name,week) |>
+      summarize(value = mean(value))
+  })
+  
+  
+  ## plot tanks
+  output$groteplot <- renderGirafe({
+    tplot <- dt()%>% 
+      ggplot( mapping=aes(x= datum,
+                          y = value,
+                          color = farm,
+                          tooltip=farm,
+                          data_id=farm))+
+      geom_point_interactive(size =0.3) + 
+      geom_smooth_interactive(se = FALSE,span = 0.6,
+                              hover_nearest = T) + 
+      annotate(
+        "rect",
+        xmin = as.Date('2026-04-10'), xmax = as.Date('2026-06-01'),  # X range of shaded area
+        ymin = -Inf, ymax = Inf,  # Full vertical range
+        alpha = 0.4, fill = "grey"
+      ) +
+      labs(
+        x = "Datum", y = "Parameter",
+        color = "Bedrijf"
+      ) +
+      theme_bw() + 
+      theme(legend.position = 'none') +
+      facet_wrap(~ name, scales = "free_y",ncol =1) 
+    
+    girafe(
+      ggobj = tplot,
+      options = list(
+        opts_hover(css = ''),
+        opts_sizing(rescale = TRUE),
+        opts_hover_inv(css = "opacity:0.1;"),
+        width_svg = 5,   # Canvas width in inches
+        height_svg = 5*length(input$var)  
+      )
+    )
+  })
+    
+    ## plot voerkosten
+    output$feplot <- renderGirafe({
+      tplot <- dfe()%>% 
+        ggplot( mapping=aes(x= date,
+                            y = value,
+                            color = user,
+                            tooltip=user,
+                            data_id=user))+
+        geom_point_interactive(size =0.3) + 
+        geom_smooth_interactive(se = FALSE,span = 0.6,
+                                hover_nearest = T) + 
+        annotate(
+          "rect",
+          xmin = as.Date('2026-04-10'), xmax = as.Date('2026-06-01'),  # X range of shaded area
+          ymin = -Inf, ymax = Inf,  # Full vertical range
+          alpha = 0.4, fill = "grey"
+        ) +
+        labs(
+          x = "Datum", y = "Parameter",
+          color = "Bedrijf"
+        ) +
+        theme_bw() + 
+        theme(legend.position = 'none') +
+        facet_wrap(~ name, scales = "free_y",ncol =1) 
+      
+      girafe(
+        ggobj = tplot,
+        options = list(
+          opts_hover(css = ''),
+          opts_sizing(rescale = TRUE),
+          opts_hover_inv(css = "opacity:0.1;"),
+          width_svg = 5,   # Canvas width in inches
+          height_svg = 5*length(input$var)  
+        )
+      )})
+      
+      ## plot producties
+      output$prplot <- renderGirafe({
+        tplot <- dpr()%>% 
+          ggplot( mapping=aes(x= week,
+                              y = value,
+                              color = farm,
+                              tooltip=farm,
+                              data_id=farm))+
+          geom_line_interactive(size =0.3) + 
+          annotate(
+            "rect",
+            xmin = as.Date('2026-04-10'), xmax = as.Date('2026-06-01'),  # X range of shaded area
+            ymin = -Inf, ymax = Inf,  # Full vertical range
+            alpha = 0.4, fill = "grey"
+          ) +
+          labs(
+            x = "Datum", y = "Parameter",
+            color = "Bedrijf"
+          ) +
+          theme_bw() + 
+          theme(legend.position = 'none') +
+          facet_wrap(~ name, scales = "free_y",ncol =1) 
+        
+        girafe(
+          ggobj = tplot,
+          options = list(
+            opts_hover(css = ''),
+            opts_sizing(rescale = TRUE),
+            opts_hover_inv(css = "opacity:0.1;"),
+            width_svg = 5,   # Canvas width in inches
+            height_svg = 5 
+          )
+        )
+    
+  })
 }
 
 
-shinyApp(ui,server,options = list(height = 500))
+shinyApp(ui,server,enableBookmarking = "url",
+         options = list(height = 500))
 
 
 
