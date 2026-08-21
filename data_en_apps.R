@@ -1,22 +1,20 @@
 ## data voor app Algra
 packages <- c("RODBC",
-              "lubridate",
-              "RPostgres",
-              "dplyr",
-              "dotenv",
-              "stringr",
-              "tools",
-              "tidyr",
-              "RMySQL",
-              "ggplot2",
-              "stringr",
-              "patchwork",
-              "gt",
-              "readxl",
-              "readr",
-              "stringr",
-              "ggiraph")
+"lubridate",
+"RPostgres",
+"tidyverse",
+"dotenv",
+"stringr",
+"tools",
+"RMySQL",
+"stringr",
+"patchwork",
+"gt",
+"readxl",
+"readr",
+"stringr")
 invisible(lapply(packages, library, character.only = TRUE))
+
 load_dot_env()
 
 fls <- list.files(path = 'data',pattern = "^tanken_[a-zA-Z]+\\.xlsx$")

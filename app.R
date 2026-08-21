@@ -1,27 +1,17 @@
-packages <- c("shiny",
-              "dplyr",
-              "tidyr",
-              "echarts4r",
-              "lubridate",
-              "bslib",
-              "ggplot2",
-              "ggiraph",
-              "bslib",
-              "thematic",
-              "tools")
-invisible(lapply(packages, library, character.only = TRUE))
+library("shiny")
+library("ggplot2")
+library("ggiraph")
+library("bslib")
+library("thematic")
+library("dplyr")
+library("lubridate")
+
 
 load("data/data.Rdata")
 ##ddff <- dff %>% pivot_longer(cols = !c(datum,farm,week))
 
 options(shiny.host = "0.0.0.0")
 options(shiny.port = 8080)
-
-# R code
-# Load necessary libraries
-library(shiny)
-library(bslib)
-
 thematic_shiny()
 
 # UI with bslib theme, pageNavbar, and bookmarking support
