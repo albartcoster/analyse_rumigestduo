@@ -9,6 +9,7 @@ packages <- c("shiny",
               "bslib",
               "thematic",
               "tools")
+
 invisible(lapply(packages, library, character.only = TRUE))
 
 load("data/data.Rdata")
