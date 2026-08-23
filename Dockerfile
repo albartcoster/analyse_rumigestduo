@@ -1,5 +1,27 @@
 # Base R Shiny image
-FROM rocker/r-ver:4.2.0
+FROM rocker/r-ver:4.5.1
+
+RUN apt-get update && apt-get install -y wget curl software-properties-common
+
+RUN apt-get update && \
+    apt-get install -y libwebp-dev libwebp7 wget curl build-essential && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && \
+    apt-get install -y libmysqlclient21 && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && \
+    apt-get install -y unixodbc && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y \
+    libuv1-dev \
+    libssl-dev \
+    libcurl4-openssl-dev \
+    libxml2-dev \
+    libgit2-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install R dependencies
 RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
