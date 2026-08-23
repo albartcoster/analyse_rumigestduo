@@ -1,18 +1,18 @@
 ## data voor app Algra
 packages <- c("RODBC",
-"lubridate",
-"RPostgres",
-"tidyverse",
-"dotenv",
-"stringr",
-"tools",
-"RMySQL",
-"stringr",
-"patchwork",
-"gt",
-"readxl",
-"readr",
-"stringr")
+              "lubridate",
+              "RPostgres",
+              "tidyverse",
+              "dotenv",
+              "stringr",
+              "tools",
+              "RMySQL",
+              "stringr",
+              "patchwork",
+              "gt",
+              "readxl",
+              "readr",
+              "stringr")
 invisible(lapply(packages, library, character.only = TRUE))
 
 load_dot_env()
@@ -43,8 +43,8 @@ ds <- read_xlsx('data/tanken_spiker.xlsx') %>%
   select(1,3,5,6,8,12) %>% 
   rename(datum  =1,
          kg = 2,
-         eiwit = 3,
-         vet = 4,
+         eiwit = 4,
+         vet = 3,
          ureum  =5,
          celgetal =6) %>% 
   mutate(farm  = 'spiker',
@@ -55,8 +55,9 @@ dff <- rbind(df,ds) %>%
   filter(kg > 5000) %>% 
   mutate(week = floor_date(datum,unit = 'week',week_start = 1)) |> 
   mutate(across(c(eiwit,vet,ureum,celgetal),
-                \(x) as.numeric(gsub("\\.",",",x)))) |> 
-  pivot_longer(cols = !c(datum,farm,week))
+                \(x) as.numeric(gsub(",","\\.",x))))|> 
+  pivot_longer(cols = !c(datum,farm,week)) |> 
+  filter(!is.na(value))
 
 
 ## GRAFIEKEN EIWIT, UREUM ,...
