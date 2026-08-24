@@ -1,0 +1,62 @@
+https://share.google/aimode/zAOEwxUqSZUkvur56
+
+Hier is de complete GitHub Actions workflow. Hiermee hoef je nooit meer zelf quarto render uit te voeren; zodra je code naar de main branch pusht, bouwt GitHub de website automatisch vanuit de map website/ en publiceert deze direct naar GitHub Pages.
+Omdat GitHub Actions de website nu volledig automatisch bouwt en publiceert, hoef je de map docs/ niet meer in je Git-repository bij te houden.
+## Stap 1: Pas je .gitignore aan
+Zorg ervoor dat de gegenereerde docs/ map niet meer lokaal wordt geüpload naar GitHub. Voeg deze regel toe aan je .gitignore bestand in de hoofdmap:
+
+docs/
+
+## Stap 2: Maak het workflow-bestand aan
+Maak in de hoofdmap van je repository de volgende mappenstructuur aan: .github/workflows/. Maak daarin een bestand genaamd deploy.yml.
+Plaats de volgende code in .github/workflows/deploy.yml:
+
+name: Bouw en Publish Quarto Website
+on:
+  push:
+    branches: [ main ] # Verander naar master als jouw hoofdtak zo heet
+  workflow_dispatch:   # Hiermee kun je de bouw ook handmatig starten via GitHub
+# Geef de workflow toestemming om naar GitHub Pages te schrijvenpermissions:
+  contents: write
+  pages: write
+  id-token: write
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v4
+
+      - name: Quarto installeren
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      # Optioneel: Voeg R installatie toe als je R-code uitvoert TIJDENS het renderen van de site
+      # - name: R installeren
+      #   uses: r-lib/actions/setup-r@v2
+
+      - name: Quarto Website Renderen
+        run: |
+          quarto render website
+      - name: Website publiceren naar GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs # Quarto plaatst de output hier op basis van je _quarto.yml
+          publish_branch: gh-pages
+
+## Stap 3: GitHub Pages instellen in je browser
+Omdat we nu een aparte tak (gh-pages) gebruiken om de live website te tonen, moeten we de instelling op GitHub één keer aanpassen:
+
+   1. Push je wijzigingen (inclusief de nieuwe workflow) naar GitHub.
+   2. Ga op GitHub naar je repository en klik op Settings → Pages.
+   3. Kies bij Build and deployment → Source voor Deploy from a branch.
+   4. Verander de branch in de dropdown van main (of root) naar gh-pages en de map naar /(root).
+   5. Klik op Save.
+
+## Hoe werkt dit nu in de praktijk?
+
+* Website aanpassen: Je werkt alleen in de map website/. Zodra je pusht naar main, start GitHub de actie, bouwt de HTML-bestanden, en zet ze op de achtergrond live.
+* Shiny app aanpassen: Je werkt in shiny_app/. Dit push je gewoon mee naar GitHub ter back-up, en je deployed de app los naar Shinyapps.io wanneer je wijzigingen maakt.
+
+Als je wilt, kan ik ook een workflow toevoegen die je Shiny app automatisch pushed naar Shinyapps.io zodra je de app-code aanpast. Heb je daar interesse in?
+

@@ -1,0 +1,28 @@
+---
+title: "Analyse van productiedata nav proef met gistproduct Altant"
+subtitle: "Onderzoek nav inzet van product Rumigest Duo op 3 Nederlandse melkveebedrijven"
+author: "Albart Coster"
+date: today
+---
+
+## Beschrijving proef
+
+Gedurende een periode van 6 weken is het product Rumigest Duo van Altant ingezet op 3 melkveebedrijven. Melkbedrijf Spiker en Compagner bevinden zich in de gemeente Staphorst. Bij Spiker worden ca 280 koeien 2 maal daags gemolken door middel van een carrousselmelkstal. Bij Compagner worden 160 koeien 2 maal daags dmv een zij-aan-zij melkstal gemolken. Melkveebedrijf Verheijen bevindt zich in Ulicoten; hier worden 120 melkkoeien door middel van 2 Lely Melkrobots gemolken.
+
+De testperiode begon op 14 april 2026 en heeft tot 23 juni 2026 gelopen. Op melkveebedrijf Compagner is het product van 20 april tot 19 mei 2026 ingezet. Op melkveebedrijf Spiker is het ook van 20 april tot 21 mei ingezet. Op melkveebedrijf Verheijen is vna 20 april tot ca 20 mei ingezet. Gedurende de testperiode en tot half juni is op de 3 bedrijven wekelijks voeropname, melkproductie en gehaltes in de tank vastgelegd. Ook hebben de veehouders wekelijks mest gezeefd en beelden doorgestuurd. Verder zijn van melkveebedrijf Verheijen gegevens uit de melkrobot beschikbaar en op melkveebedrijf Compagner gegevens van de melkstalregistratie. Met beide gegevensbronnen kunnen we producties van groepen dieren weergevens.
+
+In dit rapport vat ik de gegevens van uit de proef samen en probeer ik conclusies te trekken over inzet van het product Rumigest Duo op deze 3 bedrijven.
+
+## Resultaten
+
+Ik begin met analyse van voeropname en voerkosten. De rantsoenen op de drie bedrijven verschilden behoorlijk van elkaar; op het bedrijf Verheijen wordt een deel van het krachtvoer in de robot gevoerd; bij Compagner worden wortels gevoerd als vervanger van snijmais en bij Spiker is het aandeel ruwvoer (snijmais + gras) zeer hoog (\>65% van de drogestof). Gedurende de proefperiode zijn de rantsoenen regelmatig aangepast, dit is allemaal bijgehouden.
+
+Aandeel ruwvoer, voeropname, gemiddelde melkproductie/meetmelkproductie en voerefficientie zijn in de volgende grafieken weergegeven. De proefperiode is grijs gearceerd en de bedrijven zijn in de grafieken onderscheiden.
+
+-- Grafiek voeropname, melkproductie, aandeel ruwver en voereffici\@entie
+
+Omdat de *demografie* van een bedrijf verschilt hebben we de melkproductie bij Verheijen en Compagner weergegeven per laktatienummer en laktatiestadium. In deze grafieken is het vooral belangrijk om te letten op de productie van de dieren in de piekperiode (30 tot 60 dagen in laktatie) en de dieren in de hoogproductieve periode (60 tot 200 dagen in laktatie). Omdat deze groepen zowel aan de onder- als aan de bovenkant van laktatieperiode begrensd is kunnen we deze groepen gebruiken om conclusies te trekken.
+
+- Grafiek melkproductie per bedrijf, laktatienummer en laktatiestadium. Als het kan interactief, zodat er geselecteerd kan worden per bedrijf, laktatienummer en laktatiestadium.
+
+## Conclusie

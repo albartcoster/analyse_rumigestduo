@@ -1,0 +1,8 @@
+---
+title: "Interactief Dashboard van de proef"
+page-layout: full
+---
+
+::: {.column-screen-inset}
+<iframe src="https://dashboard.costeranalytics.nl/analyse_rumigestduo/" width="100%" height="800px" style="border:none;"></iframe>
+:::

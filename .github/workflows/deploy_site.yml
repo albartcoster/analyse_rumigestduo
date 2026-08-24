@@ -1,0 +1,37 @@
+name: Bouw en Publish Quarto Website
+
+on:
+  push:
+    branches: [ main ] # Verander naar master als jouw hoofdtak zo heet
+  workflow_dispatch:   # Hiermee kun je de bouw ook handmatig starten via GitHub
+
+# Geef de workflow toestemming om naar GitHub Pages te schrijven
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v4
+
+      - name: Quarto installeren
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      # Optioneel: Voeg R installatie toe als je R-code uitvoert TIJDENS het renderen van de site
+      # - name: R installeren
+      #   uses: r-lib/actions/setup-r@v2
+
+      - name: Quarto Website Renderen
+        run: |
+          quarto render quarto_site
+
+      - name: Website publiceren naar GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs # Quarto plaatst de output hier op basis van je _quarto.yml
+          publish_branch: gh-pages

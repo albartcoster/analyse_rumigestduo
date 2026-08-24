@@ -1,11 +1,17 @@
 project:
   type: website
+  output-dir: ../docs
 
 website:
   title: "Analyse Rumigest Duo"
   navbar:
     left:
-      - text: "Analyse"
-        href: index.html
-      - text: "Dashboard"
-        href: https://dashboard.costeranalytics.nl/analyse_rumigestduo/
+      - href: index.qmd
+        text: Home
+      - href: analyseapp.qmd
+        text: Interactive App
+
+format:
+  html:
+    theme: cosmo
+    toc: true
