@@ -28,10 +28,10 @@ RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org
 
 # Copy the Shiny app code
 WORKDIR /app
-COPY renv.lock renv.lock
+COPY shiny_app/renv.lock renv.lock
 RUN R -e "renv::restore()"
-COPY app.R app.R
-COPY data/data.Rdata data/data.Rdata
+COPY shiny_app/app.R app.R
+COPY shiny_app/data/data.Rdata data/data.Rdata
 
 # Expose the application port
 EXPOSE 8080

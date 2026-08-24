@@ -28,7 +28,7 @@ ui <- function(request){
       selectize = T,
       multiple = T
     ),
-    ##renvbookmarkButton() # Adds the bookmark button
+    bookmarkButton() # Adds the bookmark button
   ),
   navset_card_underline(
     id = "hoofd_tabs", # ID is verplicht zodat bookmarking het actieve tabblad onthoudt
