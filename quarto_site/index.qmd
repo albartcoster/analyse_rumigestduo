@@ -3,26 +3,108 @@ title: "Analyse van productiedata nav proef met gistproduct Altant"
 subtitle: "Onderzoek nav inzet van product Rumigest Duo op 3 Nederlandse melkveebedrijven"
 author: "Albart Coster"
 date: today
+bibliography: bib_albart.json
+
 ---
 
 ## Beschrijving proef
 
 Gedurende een periode van 6 weken is het product Rumigest Duo van Altant ingezet op 3 melkveebedrijven. Melkbedrijf Spiker en Compagner bevinden zich in de gemeente Staphorst. Bij Spiker worden ca 280 koeien 2 maal daags gemolken door middel van een carrousselmelkstal. Bij Compagner worden 160 koeien 2 maal daags dmv een zij-aan-zij melkstal gemolken. Melkveebedrijf Verheijen bevindt zich in Ulicoten; hier worden 120 melkkoeien door middel van 2 Lely Melkrobots gemolken.
 
-De testperiode begon op 14 april 2026 en heeft tot 23 juni 2026 gelopen. Op melkveebedrijf Compagner is het product van 20 april tot 19 mei 2026 ingezet. Op melkveebedrijf Spiker is het ook van 20 april tot 21 mei ingezet. Op melkveebedrijf Verheijen is vna 20 april tot ca 20 mei ingezet. Gedurende de testperiode en tot half juni is op de 3 bedrijven wekelijks voeropname, melkproductie en gehaltes in de tank vastgelegd. Ook hebben de veehouders wekelijks mest gezeefd en beelden doorgestuurd. Verder zijn van melkveebedrijf Verheijen gegevens uit de melkrobot beschikbaar en op melkveebedrijf Compagner gegevens van de melkstalregistratie. Met beide gegevensbronnen kunnen we producties van groepen dieren weergevens.
+De testperiode begon op 14 april 2026 en heeft tot 23 juni 2026 gelopen. Op melkveebedrijf Compagner is het product van 20 april tot 19 mei 2026 ingezet. Op melkveebedrijf Spiker is het ook van 20 april tot 21 mei ingezet. Op melkveebedrijf Verheijen is van 20 april tot ca 20 mei ingezet. Gedurende de testperiode en tot half juni is op de 3 bedrijven wekelijks voeropname, melkproductie en gehaltes in de tank vastgelegd. Ook hebben de veehouders wekelijks mest gezeefd en beelden doorgestuurd. Verder zijn van melkveebedrijf Verheijen gegevens uit de melkrobot beschikbaar en op melkveebedrijf Compagner gegevens van de melkstalregistratie. Met beide gegevensbronnen kunnen we producties van groepen dieren weergeven.
 
-In dit rapport vat ik de gegevens van uit de proef samen en probeer ik conclusies te trekken over inzet van het product Rumigest Duo op deze 3 bedrijven.
+In dit rapport vat ik de gegevens van uit de proef samen en trek ik enkele conclusies  over inzet van het product Rumigest Duo op deze 3 bedrijven.
 
 ## Resultaten
 
+### Voerefficiëntie
+
 Ik begin met analyse van voeropname en voerkosten. De rantsoenen op de drie bedrijven verschilden behoorlijk van elkaar; op het bedrijf Verheijen wordt een deel van het krachtvoer in de robot gevoerd; bij Compagner worden wortels gevoerd als vervanger van snijmais en bij Spiker is het aandeel ruwvoer (snijmais + gras) zeer hoog (\>65% van de drogestof). Gedurende de proefperiode zijn de rantsoenen regelmatig aangepast, dit is allemaal bijgehouden.
 
-Aandeel ruwvoer, voeropname, gemiddelde melkproductie/meetmelkproductie en voerefficientie zijn in de volgende grafieken weergegeven. De proefperiode is grijs gearceerd en de bedrijven zijn in de grafieken onderscheiden.
+Aandeel ruwvoer, voeropname, gemiddelde melkproductie/meetmelkproductie en voerefficientie zijn in de volgende grafieken weergegeven. De proefperiode is grijs gearceerd en de bedrijven zijn in de grafieken onderscheiden. Bij bedrijven Spiker en Compagner zijn voergegegevens al langere tijd bijgehouden. De app kan gegevens tot 2024 weergegeven, standaard start hij in januari 2026. Bij Verheijen zijn gegevens vanaf kort voor de proefperiode tot kort na de proefperiode bijgehouden.
 
--- Grafiek voeropname, melkproductie, aandeel ruwver en voereffici\@entie
+```{=html}
+<iframe 
+  src="https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&hoofd_tabs=%22Data%20voeropname%22&vartanks=%22kg%22&varfes=%5B%22production_kg%22%2C%22fe%22%5D&varpres=%22production%22&farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&fedates=%5B%222024-01-12%22%2C%222026-08-13%22%5D&prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&lactations=%5B3%2C8%5D&dil=%5B1%2C365%5D&feplot_hovered=null" 
+  width="100%" 
+  height="600px" 
+  style="border:none;">
+</iframe>
+```
 
-Omdat de *demografie* van een bedrijf verschilt hebben we de melkproductie bij Verheijen en Compagner weergegeven per laktatienummer en laktatiestadium. In deze grafieken is het vooral belangrijk om te letten op de productie van de dieren in de piekperiode (30 tot 60 dagen in laktatie) en de dieren in de hoogproductieve periode (60 tot 200 dagen in laktatie). Omdat deze groepen zowel aan de onder- als aan de bovenkant van laktatieperiode begrensd is kunnen we deze groepen gebruiken om conclusies te trekken.
+De gemiddelde voerefficiëntie ligt tussen de 1.3 en 1.5, gemiddeld was hij bij Spiker het hoogst en lagen Compagner en Verheijen er onder. Inzet van Rumigest DUO gaf geen verbetering van de voerefficiëntie. Ook gaf het geen hogere melkproductie, selecteer hiervoor parameter `production_kg`, [link](https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&hoofd_tabs=%22Data%20voeropname%22&vartanks=%22kg%22&varfes=%22production_kg%22&varpres=%22production%22&farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&fedates=%5B%222026-01-01%22%2C%222026-08-13%22%5D&prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&lactations=%5B3%2C8%5D&dil=%5B1%2C365%5D&feplot_hovered=null). De gemiddelde productie daalde bij Spiker tijdens en na inzet van Rumigest Duo, dit komt oa doordat het aandeel ruwvoer in het rantsoen fors is toegenomen ([zie](https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&hoofd_tabs=%22Data%20voeropname%22&vartanks=%22kg%22&varfes=%22frac_dm_forage%22&varpres=%22production%22&farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&fedates=%5B%222026-01-01%22%2C%222026-08-13%22%5D&prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&lactations=%5B3%2C8%5D&dil=%5B1%2C365%5D&feplot_hovered=null)). Bij Compagner daalde het aandeel ruwvoer juist, dit omdat het aandeel wortels in het rantsoen is verhoogd ivm houdbaarheid van dit product.
 
-- Grafiek melkproductie per bedrijf, laktatienummer en laktatiestadium. Als het kan interactief, zodat er geselecteerd kan worden per bedrijf, laktatienummer en laktatiestadium.
+### Tankgegevens
+
+De gegevens uit de melktank zijn vooral belangrijk voor gehaltes; dit omdat de melk niet strikt elke 72 uur wordt opgehaald en omdat het aantal koeien in de tank niet altijd gelijk is. In de volgende grafiek worden eiwit, vet en ureum in de tanken weergegeven.
+
+```{=html}
+<iframe 
+  src="https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&hoofd_tabs=%22Tankanalyse%22&vartanks=%5B%22vet%22%2C%22eiwit%22%2C%22ureum%22%5D&varfes=%22production_kg%22&varpres=%22production%22&farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&fedates=%5B%222026-01-01%22%2C%222026-08-13%22%5D&prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&lactations=%5B3%2C8%5D&dil=%5B1%2C365%5D&feplot_hovered=null&groteplot_hovered=null" 
+  width="100%" 
+  height="600px" 
+  style="border:none;">
+</iframe>
+```
+
+De tankgevens laten verschillende beelde zijn. Bij Spiker daalt vooral het eiwitgehalte in de melk fors vanaf half april; dit wijten we vooral aan het lagere aandeel krachtvoer dat sindsdien is gevoerd (zie discussie hierboven en tabblad `Data voeropname` van de webapp. Bij alle bedrijven dalen eiwit- en vetgehaltes ook licht tijdens en na de inzet van het product. Het is niet mogelijk om deze daling toe te wijzen aan verdwijnen van het product uit de rantsoenen omdat gehaltes in de melk vrijwel altijd dalen bij stijgende temperaturen en langere dagen (zie bijvoorbeeld @heck2009 en @salfer2019). Ook hier kunnen we dus geen duidelijke invloed van de inzet van Rumigest Duo op tankmelkgehaltes zien.
+
+### Individuele melkproductie
+
+Bij Compagner en Verheijen waren individuele melkproductiegegevens beschikbaar. Bij Verheijen kwamen die uit de melkrobot; voor dit bedrijf zijn de weekgemiddeldes berekend. Bij Compagner waren melkcontrolegegevens beschikbaar. Omdat de *demografie* van een bedrijf wisselt is het belangrijk om bij beoordeling van productiegegevens te kijken naar verloop van deze gegevens over de tijd, en om dit juist te doen moeten de te vergelijken groepen zo gelijkmatig mogelijk blijven. Dit is in de app te doen door gemiddeldes te berekenen van dieren met een vast laktatienummer, bijvoorbeeld `3 tot 8 laktaties`, en laktatiestadium tussen bijvoorbeeld `10 en 100` dagen in laktatie. Op deze manier kan de gemiddelde productie van verse volwassen dieren over de tijd vergeleken worden. Deze instelling staat in de volgende grafiek weergegeven.
+
+
+```{=html}
+<iframe 
+  src="https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&hoofd_tabs=%22Dagproductiedata%22&vartanks=%22kg%22&varfes=%22fe%22&varpres=%22production%22&farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&fedates=%5B%222026-01-01%22%2C%222026-08-13%22%5D&prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&lactations=%5B3%2C9%5D&dil=%5B9%2C106%5D&prplot_hovered=null" 
+  width="100%" 
+  height="600px" 
+  style="border:none;">
+</iframe>
+```
+
+De productie van deze groep was bij Verheijen stabiel over de maanden, tot juni. Begin juni trad er een verandering van kuilvoer op, helaas is dit niet goed meer te zien in de grafieken van voeropname. De sterke productiedaling van eind juni bij beide bedrijven werd veroorzaakt door het extreem warme weer van de laatste week van juni.
+
+### Analyse mestbeelden
+
+Op de bedrijven zijn gedurende de proefperiode ook mestmonsters genomen en die mest is dmv de zeefproef visueel beoordeeld. 
+
+
+::: {#fig-compagner}
+```{r}
+#| echo: false
+#| results: asis
+
+
+source('code/maak_carousel.R')
+image_dir <- "figures/fotos_compagner"
+maak_carousel(image_dir,'bedrijfcompagner','Beelden van Compagner')
+```
+
+:::
+
+::: {#fig-spiker}
+```{r}
+#| echo: false
+#| results: asis
+
+image_dir <- "figures/fotos_spiker"
+maak_carousel(image_dir,'bedrijfspiker','Beelden van Spiker')
+```
+
+:::
+
+::: {#fig-verheijen}
+```{r}
+#| echo: false
+#| results: asis
+
+image_dir <- "figures/fotos_verheijen"
+maak_carousel(image_dir,'bedrijfverheijen','Beelden van Verheijen')
+```
+
+:::
 
 ## Conclusie
+
+Inzet van Rumigest Duo in de aangeraden dosering heeft op deze 3 bedrijven niet geleid tot hogere melkproductie of betere voerefficiëntie. Ook konden we geen duidelijke verandering van de mestvertering waarnemen. Dit betekent niet dat Rumigest Duo geen invloed heeft, maar waarschijnlijk dat eventuele invloed van het product minder groot is dan de variatie die op een bedrijf speelt. Een mogelijkheid om dit uit te sluiten is door het product gedurende langere tijd aan een groep dieren op een bedrijf te verstrekken terwijl een vergelijkbare groep produceert zonder dit product. In praktijkomstandigheden is dit makkelijk te realiseren als het product Rumigest Duo in een brok geperst kan worden. Door dan dieren bij bijvoorbeeld een even oornummer de brok met het product aan te bieden en dieren met een oneven oornummer niet, gedurende langere tijd, kan het effect van het product gedurende goed geëvalueerd worden. 
