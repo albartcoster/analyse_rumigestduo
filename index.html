@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl" xml:lang="nl"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Albart Coster">
-<meta name="dcterms.date" content="2026-08-24">
+<meta name="dcterms.date" content="2026-09-09">
 
 <title>Analyse van productiedata nav proef met gistproduct Altant – Analyse Rumigest Duo</title>
 <style>
@@ -28,7 +28,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -47,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e3adbaa939bcd423dddc8c8a834270b4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3e9b1289f5f353c49b617ce48ad2bc38.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -62,21 +81,22 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Geen resultaten",
+    "search-matching-documents-text": "Gevonden documenten",
+    "search-copy-link-title": "Kopieer link om te zoeken",
+    "search-hide-matches-text": "Extra overeenkomsten verbergen",
+    "search-more-match-text": "meer overeenkomst in dit document",
+    "search-more-matches-text": "meer overeenkomsten in dit document",
+    "search-clear-button-title": "Wissen",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Annuleren",
+    "search-submit-button-title": "Verzenden",
+    "search-label": "Zoeken"
   }
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -90,8 +110,8 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">Analyse Rumigest Duo</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Zoeken"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Schakel navigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -117,11 +137,17 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Op deze pagina</h2>
    
   <ul>
   <li><a href="#beschrijving-proef" id="toc-beschrijving-proef" class="nav-link active" data-scroll-target="#beschrijving-proef">Beschrijving proef</a></li>
-  <li><a href="#resultaten" id="toc-resultaten" class="nav-link" data-scroll-target="#resultaten">Resultaten</a></li>
+  <li><a href="#resultaten" id="toc-resultaten" class="nav-link" data-scroll-target="#resultaten">Resultaten</a>
+  <ul class="collapse">
+  <li><a href="#voerefficiëntie" id="toc-voerefficiëntie" class="nav-link" data-scroll-target="#voerefficiëntie">Voerefficiëntie</a></li>
+  <li><a href="#tankgegevens" id="toc-tankgegevens" class="nav-link" data-scroll-target="#tankgegevens">Tankgegevens</a></li>
+  <li><a href="#individuele-melkproductie" id="toc-individuele-melkproductie" class="nav-link" data-scroll-target="#individuele-melkproductie">Individuele melkproductie</a></li>
+  <li><a href="#analyse-mestbeelden" id="toc-analyse-mestbeelden" class="nav-link" data-scroll-target="#analyse-mestbeelden">Analyse mestbeelden</a></li>
+  </ul></li>
   <li><a href="#conclusie" id="toc-conclusie" class="nav-link" data-scroll-target="#conclusie">Conclusie</a></li>
   </ul>
 </nav>
@@ -140,16 +166,16 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Auteur</div>
     <div class="quarto-title-meta-contents">
              <p>Albart Coster </p>
           </div>
   </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-heading">Publicatiedatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 24, 2026</p>
+      <p class="date">9 september 2026</p>
     </div>
   </div>
   
@@ -164,26 +190,435 @@ ul.task-list li input[type="checkbox"] {
 <section id="beschrijving-proef" class="level2">
 <h2 class="anchored" data-anchor-id="beschrijving-proef">Beschrijving proef</h2>
 <p>Gedurende een periode van 6 weken is het product Rumigest Duo van Altant ingezet op 3 melkveebedrijven. Melkbedrijf Spiker en Compagner bevinden zich in de gemeente Staphorst. Bij Spiker worden ca 280 koeien 2 maal daags gemolken door middel van een carrousselmelkstal. Bij Compagner worden 160 koeien 2 maal daags dmv een zij-aan-zij melkstal gemolken. Melkveebedrijf Verheijen bevindt zich in Ulicoten; hier worden 120 melkkoeien door middel van 2 Lely Melkrobots gemolken.</p>
-<p>De testperiode begon op 14 april 2026 en heeft tot 23 juni 2026 gelopen. Op melkveebedrijf Compagner is het product van 20 april tot 19 mei 2026 ingezet. Op melkveebedrijf Spiker is het ook van 20 april tot 21 mei ingezet. Op melkveebedrijf Verheijen is vna 20 april tot ca 20 mei ingezet. Gedurende de testperiode en tot half juni is op de 3 bedrijven wekelijks voeropname, melkproductie en gehaltes in de tank vastgelegd. Ook hebben de veehouders wekelijks mest gezeefd en beelden doorgestuurd. Verder zijn van melkveebedrijf Verheijen gegevens uit de melkrobot beschikbaar en op melkveebedrijf Compagner gegevens van de melkstalregistratie. Met beide gegevensbronnen kunnen we producties van groepen dieren weergevens.</p>
-<p>In dit rapport vat ik de gegevens van uit de proef samen en probeer ik conclusies te trekken over inzet van het product Rumigest Duo op deze 3 bedrijven.</p>
+<p>De testperiode begon op 14 april 2026 en heeft tot 23 juni 2026 gelopen. Op melkveebedrijf Compagner is het product van 20 april tot 19 mei 2026 ingezet. Op melkveebedrijf Spiker is het ook van 20 april tot 21 mei ingezet. Op melkveebedrijf Verheijen is van 20 april tot ca 20 mei ingezet. Gedurende de testperiode en tot half juni is op de 3 bedrijven wekelijks voeropname, melkproductie en gehaltes in de tank vastgelegd. Ook hebben de veehouders wekelijks mest gezeefd en beelden doorgestuurd. Verder zijn van melkveebedrijf Verheijen gegevens uit de melkrobot beschikbaar en op melkveebedrijf Compagner gegevens van de melkstalregistratie. Met beide gegevensbronnen kunnen we producties van groepen dieren weergeven.</p>
+<p>In dit rapport vat ik de gegevens van uit de proef samen en trek ik enkele conclusies over inzet van het product Rumigest Duo op deze 3 bedrijven.</p>
 </section>
 <section id="resultaten" class="level2">
 <h2 class="anchored" data-anchor-id="resultaten">Resultaten</h2>
+<section id="voerefficiëntie" class="level3">
+<h3 class="anchored" data-anchor-id="voerefficiëntie">Voerefficiëntie</h3>
 <p>Ik begin met analyse van voeropname en voerkosten. De rantsoenen op de drie bedrijven verschilden behoorlijk van elkaar; op het bedrijf Verheijen wordt een deel van het krachtvoer in de robot gevoerd; bij Compagner worden wortels gevoerd als vervanger van snijmais en bij Spiker is het aandeel ruwvoer (snijmais + gras) zeer hoog (&gt;65% van de drogestof). Gedurende de proefperiode zijn de rantsoenen regelmatig aangepast, dit is allemaal bijgehouden.</p>
-<p>Aandeel ruwvoer, voeropname, gemiddelde melkproductie/meetmelkproductie en voerefficientie zijn in de volgende grafieken weergegeven. De proefperiode is grijs gearceerd en de bedrijven zijn in de grafieken onderscheiden.</p>
-<p>– Grafiek voeropname, melkproductie, aandeel ruwver en voereffici@entie</p>
-<p>Omdat de <em>demografie</em> van een bedrijf verschilt hebben we de melkproductie bij Verheijen en Compagner weergegeven per laktatienummer en laktatiestadium. In deze grafieken is het vooral belangrijk om te letten op de productie van de dieren in de piekperiode (30 tot 60 dagen in laktatie) en de dieren in de hoogproductieve periode (60 tot 200 dagen in laktatie). Omdat deze groepen zowel aan de onder- als aan de bovenkant van laktatieperiode begrensd is kunnen we deze groepen gebruiken om conclusies te trekken.</p>
-<ul>
-<li>Grafiek melkproductie per bedrijf, laktatienummer en laktatiestadium. Als het kan interactief, zodat er geselecteerd kan worden per bedrijf, laktatienummer en laktatiestadium.</li>
-</ul>
+<p>Aandeel ruwvoer, voeropname, gemiddelde melkproductie/meetmelkproductie en voerefficientie zijn in de volgende grafieken weergegeven. De proefperiode is grijs gearceerd en de bedrijven zijn in de grafieken onderscheiden. Bij bedrijven Spiker en Compagner zijn voergegegevens al langere tijd bijgehouden. De app kan gegevens tot 2024 weergegeven, standaard start hij in januari 2026. Bij Verheijen zijn gegevens vanaf kort voor de proefperiode tot kort na de proefperiode bijgehouden.</p>
+<iframe src="https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&amp;hoofd_tabs=%22Data%20voeropname%22&amp;vartanks=%22kg%22&amp;varfes=%5B%22production_kg%22%2C%22fe%22%5D&amp;varpres=%22production%22&amp;farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&amp;fedates=%5B%222024-01-12%22%2C%222026-08-13%22%5D&amp;prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&amp;lactations=%5B3%2C8%5D&amp;dil=%5B1%2C365%5D&amp;feplot_hovered=null" width="100%" height="600px" style="border:none;">
+</iframe>
+<p>De gemiddelde voerefficiëntie ligt tussen de 1.3 en 1.5, gemiddeld was hij bij Spiker het hoogst en lagen Compagner en Verheijen er onder. Inzet van Rumigest DUO gaf geen verbetering van de voerefficiëntie. Ook gaf het geen hogere melkproductie, selecteer hiervoor parameter <code>production_kg</code>, <a href="https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&amp;hoofd_tabs=%22Data%20voeropname%22&amp;vartanks=%22kg%22&amp;varfes=%22production_kg%22&amp;varpres=%22production%22&amp;farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&amp;fedates=%5B%222026-01-01%22%2C%222026-08-13%22%5D&amp;prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&amp;lactations=%5B3%2C8%5D&amp;dil=%5B1%2C365%5D&amp;feplot_hovered=null">link</a>. De gemiddelde productie daalde bij Spiker tijdens en na inzet van Rumigest Duo, dit komt oa doordat het aandeel ruwvoer in het rantsoen fors is toegenomen (<a href="https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&amp;hoofd_tabs=%22Data%20voeropname%22&amp;vartanks=%22kg%22&amp;varfes=%22frac_dm_forage%22&amp;varpres=%22production%22&amp;farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&amp;fedates=%5B%222026-01-01%22%2C%222026-08-13%22%5D&amp;prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&amp;lactations=%5B3%2C8%5D&amp;dil=%5B1%2C365%5D&amp;feplot_hovered=null">zie</a>). Bij Compagner daalde het aandeel ruwvoer juist, dit omdat het aandeel wortels in het rantsoen is verhoogd ivm houdbaarheid van dit product.</p>
+</section>
+<section id="tankgegevens" class="level3">
+<h3 class="anchored" data-anchor-id="tankgegevens">Tankgegevens</h3>
+<p>De gegevens uit de melktank zijn vooral belangrijk voor gehaltes; dit omdat de melk niet strikt elke 72 uur wordt opgehaald en omdat het aantal koeien in de tank niet altijd gelijk is. In de volgende grafiek worden eiwit, vet en ureum in de tanken weergegeven.</p>
+<iframe src="https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&amp;hoofd_tabs=%22Tankanalyse%22&amp;vartanks=%5B%22vet%22%2C%22eiwit%22%2C%22ureum%22%5D&amp;varfes=%22production_kg%22&amp;varpres=%22production%22&amp;farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&amp;fedates=%5B%222026-01-01%22%2C%222026-08-13%22%5D&amp;prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&amp;lactations=%5B3%2C8%5D&amp;dil=%5B1%2C365%5D&amp;feplot_hovered=null&amp;groteplot_hovered=null" width="100%" height="600px" style="border:none;">
+</iframe>
+<p>De tankgevens laten verschillende beelde zijn. Bij Spiker daalt vooral het eiwitgehalte in de melk fors vanaf half april; dit wijten we vooral aan het lagere aandeel krachtvoer dat sindsdien is gevoerd (zie discussie hierboven en tabblad <code>Data voeropname</code> van de webapp. Bij alle bedrijven dalen eiwit- en vetgehaltes ook licht tijdens en na de inzet van het product. Het is niet mogelijk om deze daling toe te wijzen aan verdwijnen van het product uit de rantsoenen omdat gehaltes in de melk vrijwel altijd dalen bij stijgende temperaturen en langere dagen (zie bijvoorbeeld <span class="citation" data-cites="heck2009">Heck e.a. (<a href="#ref-heck2009" role="doc-biblioref">2009</a>)</span> en <span class="citation" data-cites="salfer2019">Salfer e.a. (<a href="#ref-salfer2019" role="doc-biblioref">2019</a>)</span>). Ook hier kunnen we dus geen duidelijke invloed van de inzet van Rumigest Duo op tankmelkgehaltes zien.</p>
+</section>
+<section id="individuele-melkproductie" class="level3">
+<h3 class="anchored" data-anchor-id="individuele-melkproductie">Individuele melkproductie</h3>
+<p>Bij Compagner en Verheijen waren individuele melkproductiegegevens beschikbaar. Bij Verheijen kwamen die uit de melkrobot; voor dit bedrijf zijn de weekgemiddeldes berekend. Bij Compagner waren melkcontrolegegevens beschikbaar. Omdat de <em>demografie</em> van een bedrijf wisselt is het belangrijk om bij beoordeling van productiegegevens te kijken naar verloop van deze gegevens over de tijd, en om dit juist te doen moeten de te vergelijken groepen zo gelijkmatig mogelijk blijven. Dit is in de app te doen door gemiddeldes te berekenen van dieren met een vast laktatienummer, bijvoorbeeld <code>3 tot 8 laktaties</code>, en laktatiestadium tussen bijvoorbeeld <code>10 en 100</code> dagen in laktatie. Op deze manier kan de gemiddelde productie van verse volwassen dieren over de tijd vergeleken worden. Deze instelling staat in de volgende grafiek weergegeven.</p>
+<iframe src="https://dashboard.costeranalytics.nl/analyse_rumigestduo/?_inputs_&amp;hoofd_tabs=%22Dagproductiedata%22&amp;vartanks=%22kg%22&amp;varfes=%22fe%22&amp;varpres=%22production%22&amp;farm=%5B%22compagner%22%2C%22verheijen%22%2C%22spiker%22%5D&amp;fedates=%5B%222026-01-01%22%2C%222026-08-13%22%5D&amp;prdates=%5B%222026-01-01%22%2C%222026-08-11%22%5D&amp;lactations=%5B3%2C9%5D&amp;dil=%5B9%2C106%5D&amp;prplot_hovered=null" width="100%" height="600px" style="border:none;">
+</iframe>
+<p>De productie van deze groep was bij Verheijen stabiel over de maanden, tot juni. Begin juni trad er een verandering van kuilvoer op, helaas is dit niet goed meer te zien in de grafieken van voeropname. De sterke productiedaling van eind juni bij beide bedrijven werd veroorzaakt door het extreem warme weer van de laatste week van juni.</p>
+</section>
+<section id="analyse-mestbeelden" class="level3">
+<h3 class="anchored" data-anchor-id="analyse-mestbeelden">Analyse mestbeelden</h3>
+<p>Op de bedrijven zijn gedurende de proefperiode ook mestmonsters genomen en die mest is dmv de zeefproef visueel beoordeeld.</p>
+<div id="fig-compagner" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-compagner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="carousel-bedrijfcompagner" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="figures/fotos_compagner/20260414_compagner1.jpg" class="d-block w-100 figure-img" alt="20260414_compagner1.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260414_compagner1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260414_compagner2.jpg" class="d-block w-100 figure-img" alt="20260414_compagner2.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260414_compagner2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260414_compagner3.jpg" class="d-block w-100 figure-img" alt="20260414_compagner3.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260414_compagner3</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260414_compagner4.jpg" class="d-block w-100 figure-img" alt="20260414_compagner4.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260414_compagner4</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260422_compagner1.jpeg" class="d-block w-100 figure-img" alt="20260422_compagner1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_compagner1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260422_compagner2.jpeg" class="d-block w-100 figure-img" alt="20260422_compagner2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_compagner2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260422_compagner3.jpeg" class="d-block w-100 figure-img" alt="20260422_compagner3.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_compagner3</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260422_compagner4.jpeg" class="d-block w-100 figure-img" alt="20260422_compagner4.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_compagner4</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260422_compagner5.jpeg" class="d-block w-100 figure-img" alt="20260422_compagner5.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_compagner5</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260422_compagner6.jpeg" class="d-block w-100 figure-img" alt="20260422_compagner6.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_compagner6</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260422_compagner7.jpeg" class="d-block w-100 figure-img" alt="20260422_compagner7.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_compagner7</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260428_compagner1.jpeg" class="d-block w-100 figure-img" alt="20260428_compagner1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260428_compagner1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260428_compagner2.jpeg" class="d-block w-100 figure-img" alt="20260428_compagner2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260428_compagner2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260504_compagner1.jpg" class="d-block w-100 figure-img" alt="20260504_compagner1.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260504_compagner1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260504_compagner2.jpg" class="d-block w-100 figure-img" alt="20260504_compagner2.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260504_compagner2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260504_compagner3.jpg" class="d-block w-100 figure-img" alt="20260504_compagner3.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260504_compagner3</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260511_compagner1.jpeg" class="d-block w-100 figure-img" alt="20260511_compagner1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260511_compagner1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260511_compagner2.jpeg" class="d-block w-100 figure-img" alt="20260511_compagner2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260511_compagner2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260511_compagner3.jpeg" class="d-block w-100 figure-img" alt="20260511_compagner3.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260511_compagner3</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260602_compagner1.jpg" class="d-block w-100 figure-img" alt="20260602_compagner1.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260602_compagner1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260602_compagner2.jpg" class="d-block w-100 figure-img" alt="20260602_compagner2.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260602_compagner2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260623_compagner1.jpg" class="d-block w-100 figure-img" alt="20260623_compagner1.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260623_compagner1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_compagner/20260623_compagner2.jpg" class="d-block w-100 figure-img" alt="20260623_compagner2.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260623_compagner2</h5>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-bedrijfcompagner" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel-bedrijfcompagner" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </button>
+</div>
+
+Beelden van Compagner
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-compagner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;1
+</figcaption>
+</figure>
+</div>
+<div id="fig-spiker" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-spiker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="carousel-bedrijfspiker" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="figures/fotos_spiker/20260414_spiker1.jpg" class="d-block w-100 figure-img" alt="20260414_spiker1.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260414_spiker1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260414_spiker2.jpg" class="d-block w-100 figure-img" alt="20260414_spiker2.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260414_spiker2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260423_spiker1.jpeg" class="d-block w-100 figure-img" alt="20260423_spiker1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260423_spiker1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260423_spiker2.jpeg" class="d-block w-100 figure-img" alt="20260423_spiker2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260423_spiker2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260501_spiker1.jpeg" class="d-block w-100 figure-img" alt="20260501_spiker1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260501_spiker1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260501_spiker2.jpeg" class="d-block w-100 figure-img" alt="20260501_spiker2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260501_spiker2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260506_spiker1.jpg" class="d-block w-100 figure-img" alt="20260506_spiker1.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260506_spiker1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260506_spiker2.jpg" class="d-block w-100 figure-img" alt="20260506_spiker2.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260506_spiker2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260515_spiker1.jpeg" class="d-block w-100 figure-img" alt="20260515_spiker1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260515_spiker1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260515_spiker2.jpeg" class="d-block w-100 figure-img" alt="20260515_spiker2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260515_spiker2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260520_spiker1.jpeg" class="d-block w-100 figure-img" alt="20260520_spiker1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260520_spiker1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260520_spiker2.jpeg" class="d-block w-100 figure-img" alt="20260520_spiker2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260520_spiker2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260527_spiker1.jpeg" class="d-block w-100 figure-img" alt="20260527_spiker1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260527_spiker1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260527_spiker2.jpeg" class="d-block w-100 figure-img" alt="20260527_spiker2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260527_spiker2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260527_spiker3.jpeg" class="d-block w-100 figure-img" alt="20260527_spiker3.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260527_spiker3</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260527_spiker4.jpeg" class="d-block w-100 figure-img" alt="20260527_spiker4.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260527_spiker4</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260602_spiker1.jpg" class="d-block w-100 figure-img" alt="20260602_spiker1.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260602_spiker1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_spiker/20260603_spiker2.jpg" class="d-block w-100 figure-img" alt="20260603_spiker2.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260603_spiker2</h5>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-bedrijfspiker" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel-bedrijfspiker" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </button>
+</div>
+
+Beelden van Spiker
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-spiker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;2
+</figcaption>
+</figure>
+</div>
+<div id="fig-verheijen" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-verheijen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="carousel-bedrijfverheijen" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="figures/fotos_verheijen/20260415_verheijen (2).jpg" class="d-block w-100 figure-img" alt="20260415_verheijen (2).jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260415_verheijen (2)</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260415_verheijen (3).jpg" class="d-block w-100 figure-img" alt="20260415_verheijen (3).jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260415_verheijen (3)</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260415_verheijen.jpg" class="d-block w-100 figure-img" alt="20260415_verheijen.jpg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260415_verheijen</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260422_verheijen_1.jpeg" class="d-block w-100 figure-img" alt="20260422_verheijen_1.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_verheijen_1</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260422_verheijen_2.jpeg" class="d-block w-100 figure-img" alt="20260422_verheijen_2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_verheijen_2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260422_verheijen_3.jpeg" class="d-block w-100 figure-img" alt="20260422_verheijen_3.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260422_verheijen_3</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260428_verheijen.jpeg" class="d-block w-100 figure-img" alt="20260428_verheijen.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260428_verheijen</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260428_verheijen_2.jpeg" class="d-block w-100 figure-img" alt="20260428_verheijen_2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260428_verheijen_2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260428_verheijen_3.jpeg" class="d-block w-100 figure-img" alt="20260428_verheijen_3.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260428_verheijen_3</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260515_verheijen_!.jpeg" class="d-block w-100 figure-img" alt="20260515_verheijen_!.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260515_verheijen_!</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260515_verheijen_2.jpeg" class="d-block w-100 figure-img" alt="20260515_verheijen_2.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260515_verheijen_2</h5>
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="figures/fotos_verheijen/20260515_verheijen_3.jpeg" class="d-block w-100 figure-img" alt="20260515_verheijen_3.jpeg">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="anchored">20260515_verheijen_3</h5>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-bedrijfverheijen" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel-bedrijfverheijen" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </button>
+</div>
+
+Beelden van Verheijen
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-verheijen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;3
+</figcaption>
+</figure>
+</div>
+</section>
 </section>
 <section id="conclusie" class="level2">
 <h2 class="anchored" data-anchor-id="conclusie">Conclusie</h2>
+<p>Inzet van Rumigest Duo in de aangeraden dosering heeft op deze 3 bedrijven niet geleid tot hogere melkproductie of betere voerefficiëntie. Ook konden we geen duidelijke verandering van de mestvertering waarnemen. Dit betekent niet dat Rumigest Duo geen invloed heeft, maar waarschijnlijk dat eventuele invloed van het product minder groot is dan de variatie die op een bedrijf speelt. Een mogelijkheid om dit uit te sluiten is door het product gedurende langere tijd aan een groep dieren op een bedrijf te verstrekken terwijl een vergelijkbare groep produceert zonder dit product. In praktijkomstandigheden is dit makkelijk te realiseren als het product Rumigest Duo in een brok geperst kan worden. Door dan dieren bij bijvoorbeeld een even oornummer de brok met het product aan te bieden en dieren met een oneven oornummer niet, gedurende langere tijd, kan het effect van het product gedurende goed geëvalueerd worden.</p>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Referenties</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-heck2009" class="csl-entry" role="listitem">
+Heck, J.M.L., H.J.F. van Valenberg, J. Dijkstra, en A.C.M. van Hooijdonk. 2009. <span>‘Seasonal Variation in the Dutch Bovine Raw Milk Composition’</span>. <em>Journal of Dairy Science</em> 92 (10): 4745-55. <a href="https://doi.org/10.3168/jds.2009-2146">https://doi.org/10.3168/jds.2009-2146</a>.
+</div>
+<div id="ref-salfer2019" class="csl-entry" role="listitem">
+Salfer, I.J., C.D. Dechow, en K.J. Harvatine. 2019. <span>‘Annual rhythms of milk and milk fat and protein production in dairy cattle in the United States’</span>. <em>Journal of Dairy Science</em> 102 (1): 742-53. <a href="https://doi.org/10.3168/JDS.2018-15040">https://doi.org/10.3168/JDS.2018-15040</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -209,12 +644,12 @@ ul.task-list li input[type="checkbox"] {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Gekopieerd!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Gekopieerd!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
